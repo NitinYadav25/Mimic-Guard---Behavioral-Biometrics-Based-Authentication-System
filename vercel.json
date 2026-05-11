@@ -1,0 +1,47 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "backend/server.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "frontend/**",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/backend/server.js"
+        },
+        {
+            "src": "/health",
+            "dest": "/backend/server.js"
+        },
+        {
+            "src": "/(.*\\.(css|js|png|jpg|gif|svg|ico))",
+            "dest": "/frontend/$1"
+        },
+        {
+            "src": "/",
+            "dest": "/frontend/register.html"
+        },
+        {
+            "src": "/register",
+            "dest": "/frontend/register.html"
+        },
+        {
+            "src": "/login",
+            "dest": "/frontend/login.html"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/frontend/$1"
+        }
+    ],
+    "env": {
+        "MONGODB_URI": "@mongodb_uri",
+        "PORT": "5000"
+    }
+}
